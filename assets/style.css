@@ -1,0 +1,22 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+header {
+    display:flex;
+    justify-content:center;
+    background:lightseagreen;
+}
+
+.search-container{
+    background-color:magenta;
+}
+
+.weather-info-container{
+    background-color:lime;
+}
+
+.five-day-forecast{
+    background-color:red;
+}
