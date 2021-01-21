@@ -8,22 +8,98 @@
     <script src="./assets/style.css"></script>
 </head>
 <body>
-
+<!-- Header -->
 <header class="header-box" id="header-box">
     <h2 class="header-title">Matthew Bianco Weather Dashboard</h2>
 </header>
+<!-- Header End -->
+
 <!-- City Search Area start -->
 <div class="search-container">
     <div class="search-area">
+
         <h3 class="search-header">Search a city</h3>
         <div>
-        <input class="search-box" id="search-box">
+        <input type="text" placeholder="search a city" name="city" class="search-box" id="search-box" />
         <button class="search-button">icon</button>
-        <ul class="search-history" id="search-history"></ul>
+        <ul class="search-history-bar" id="search-history-bar"></ul>
+            <li class="search-history" id="search-history"></li>
+
         </div>
     </div>
 </div>
+<!-- City Search Area End -->
 
+    <h3 class="city-name" id="city-name"></h3>
+    <h3 class="date" id= "date"></h3>
+    <p class="weather-icon" id="weather-icon"></p>
+
+
+<!-- City Info Area -->
+<div class="weather-info-container">
+
+    <div class="basic-info">
+    <h4 class="current-city-name" id="#current-city-name"></h4>
+    <p class="date" id="date">date</p>
+    <p class="weather-icon" id="weather-icon"></p>
+    </div>
+
+    <div class="weather-info">
+    <p class="temperature"></p>
+    <p class="humidity"></p>
+    <p class="wind-speed"></p>
+    <p class="uv-index"></p>
+    </div>
+    
+</div>
+<!-- City Info Area End -->
+
+
+<!-- Five Day Forecast-->
+<div class="five-day-forecast">
+
+    <!-- Day 1 -->
+        <div class="day-one">
+            <p class="date"></p>
+            <p class="icon-day-one"></p>
+            <p class="temp-day-one"></p>
+            <p class="humidity-day-one"></p>
+        </div>
+
+    <!-- Day 2 -->
+    <div class="day-one">
+        <p class="date"></p>
+        <p class="icon-day-two"></p>
+        <p class="temp-day-two"></p>
+        <p class="humidity-day-two"></p>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day-one">
+        <p class="date"></p>
+        <p class="icon-day-three"></p>
+        <p class="temp-day-three"></p>
+        <p class="humidity-day-three"></p>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day-one">
+        <p class="date"></p>
+        <p class="icon-day-four"></p>
+        <p class="temp-day-four"></p>
+        <p class="humidity-day-four"></p>
+    </div>
+
+    <!-- Day 5 -->
+    <div class="day-one">
+        <p class="date"></p>
+        <p class="icon-day-one"></p>
+        <p class="temp-day-one"></p>
+        <p class="humidity-day-one"></p>
+    </div>
+
+
+</div>
 
 
 
