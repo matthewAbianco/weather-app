@@ -1,15 +1,14 @@
-*{
-    margin:0;
-    padding:0;
-}
 
+body {
+    background-color:mediumorchid;
+}
 header {
     display:flex;
     justify-content:center;
     background:lightseagreen;
 }
 
-.search-container{
+.search{
     background-color:magenta;
 }
 
@@ -19,4 +18,8 @@ header {
 
 .five-day-forecast{
     background-color:red;
+}
+
+.search-container{
+    padding-left:10px;
 }
