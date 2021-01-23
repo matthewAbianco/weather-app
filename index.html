@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>weather </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="./assets/style.css"/>
@@ -25,10 +25,12 @@
         <h3 class="search-header">Search a city</h3>
 
         <div>
+            <form id="city-form" class="form-card">
         <input type="text" placeholder="search a city" name="city" class="search-box" id="city-name" />
         <button class="search-button" id="search-button">icon</button>
         <ul class="search-history-bar list-unstyled" id="search-history-bar"></ul>
             <li class="search-history" id="search-history"></li>
+        </form>
         </div>
 
     </div>
@@ -46,7 +48,7 @@
 
     <div class="basic-info ">
     <h4 class="current-city-name" id="#current-city-name"></h4>
-    <p class="date" id="date">date</p>
+    <p class="current-date" id="current-date">date</p>
     <img class="weather-icon" id="weather-icon"></img>
     </div>
 
@@ -54,7 +56,7 @@
     <p class="temperature">Temperature:</p>
     <p class="humidity">Humidity:</p>
     <p class="wind-speed">Wind Speed:</p>
-    <p class="uv-index">Uv Index:</p>
+    <p class="uv-index" id="uv-index">UV Index:</p>
     </div>
     
 </div>

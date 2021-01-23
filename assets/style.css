@@ -19,4 +19,34 @@ header {
 
 .five-day-forecast{
     background-color:red;
+    padding: 10px;
 }
+
+.basic-info {
+    display: flex;
+    padding: 10px;
+}
+
+.current-city-name {
+    padding:10px;
+}
+
+.current-date {
+    padding: 10px;
+    
+}
+
+.low {
+    background-color:black;
+    color: white;
+  }
+  
+.moderate {
+    background-color: orange;
+    color: white;
+  }
+  
+.high {
+    background-color: red;
+    color: white;
+  }

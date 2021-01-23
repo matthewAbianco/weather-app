@@ -1,57 +1,84 @@
-// API key
-var key = "813dabee4e4e5ea4aecea876113e9598";
+var userFormEl = document.querySelector("#city-form");
+var cityName = document.querySelector("#city-name");
 
-// search bar
-var cityUv = $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=Toronto&units=metric&appid=4c67d1c852a0404242197e390eff43e5", function(){
-    var latitude = cityUv.responseJSON.coord.lat;
-    var longitude = cityUv.responseJSON.coord.lon;
-
-     
-
-    var violet = $.getJSON("http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=4c67d1c852a0404242197e390eff43e5", function(){
-        console.log(violet);
-
-        var uv = violet.responseJSON.value;
-        console.log(uv);
- });
- 
-});
+var formSubmitHandler = function(event) {
+    event.preventDefault();
+    // get value from input element
+  var searchedCity = cityName.value.trim();
   
-
-$.getJSON("http://api.openweathermap.org/data/2.5/weather?q=Toronto&units=metric&appid=4c67d1c852a0404242197e390eff43e5", function(currentWeatherData){
-        console.log(currentWeatherData);
-
-        var icon = "https://openweathermap.org/img/w/" + currentWeatherData.weather[0].icon + ".png";
-        console.log(icon);
-
-        var temp = Math.floor(currentWeatherData.main.temp);
-        var cityName = currentWeatherData.name;
-        var humidity = currentWeatherData.main.humidity;
-        var windSpeed = currentWeatherData.wind.speed;
-
-// city info
-        $(".current-city-name").append(cityName)
-        $('#date').append();
-        $(".weather-icon").attr("src", icon);
-
-// weather info
-        $(".temperature").append(temp);
-        $(".humidity").append(humidity);
-        $(".wind-speed").append(windSpeed);
-
-
-        
-}); 
+  if (searchedCity) {
+    getCityInfo(searchedCity);
+    cityName.value = "";
+  } else {
+    alert("Please choose a city on Earth");
+  }
+  };
 
 
 
+var getCityInfo = function(city) {
+  // format the github api url
+  var currentWeatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=4c67d1c852a0404242197e390eff43e5";
 
-$('#date');
-
-function update() {
-  $('#date').html(moment().format("MMM Do YY"));
-
-setInterval(update, 600,000);
+  // make a request to the url
+  fetch(currentWeatherUrl).then(function(currentWeatherUrlResponse) {
+    currentWeatherUrlResponse.json().then(function(currentWeatherUrldata) {
+      console.log(currentWeatherUrldata);
+      currentCity(currentWeatherUrldata, city);
+    });
+  });
 };
-update();
 
+currentCity = function(currentCityData){
+
+    var searchedCity = currentCityData.name;
+    var temp = Math.floor(currentCityData.main.temp);
+    var icon = "https://openweathermap.org/img/w/" + currentCityData.weather[0].icon + ".png";
+    var humidity = currentCityData.main.humidity;
+    var windSpeed = currentCityData.wind.speed;
+
+    var latitude = currentCityData.coord.lat;
+    var longitude = currentCityData.coord.lon;
+
+
+    $(".current-city-name").append(searchedCity);
+    $('#current-date');
+    $(".weather-icon").attr("src", icon);
+
+    $(".temperature").append(temp);
+    $(".humidity").append(humidity);
+    $(".wind-speed").append(windSpeed);
+
+
+    function update() {
+        $('#current-date').html(moment().format("MMM Do YY"));
+      
+      };
+      update(update, 600,000);
+
+    var uvIndexUrl = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=4c67d1c852a0404242197e390eff43e5"
+
+   // make a request to the url
+   fetch(uvIndexUrl).then(function(uvIndexUrlResponse) {
+    uvIndexUrlResponse.json().then(function(uvIndexdata) {
+      console.log(uvIndexdata);
+      uvData(uvIndexdata);
+       
+    });
+  });
+};
+    
+uvData = function(uvIndex){
+    
+    
+    var uvValue = Math.floor(uvIndex.value)
+    $(".uv-index").append(uvValue);
+};
+    
+    
+
+
+
+
+
+userFormEl.addEventListener("submit", formSubmitHandler);
