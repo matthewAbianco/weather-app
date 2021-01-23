@@ -1,6 +1,7 @@
-var userFormEl = document.querySelector("#city-form");
+var citySearch = document.querySelector("#city-form");
 var cityName = document.querySelector("#city-name");
 
+// takes the userFormEl
 var formSubmitHandler = function(event) {
     event.preventDefault();
     // get value from input element
@@ -69,16 +70,42 @@ currentCity = function(currentCityData){
 };
     
 uvData = function(uvIndex){
+    console.log(uvIndex);
     
-    
-    var uvValue = Math.floor(uvIndex.value)
+    var uvValue = Math.floor(uvIndex.value);
     $(".uv-index").append(uvValue);
+
+    uvCheck(uvValue);
+
+
+ 
 };
+
+var uvCheck = function (uvValue){
+        
+        
+    console.log(uvCheck)
+    // 9 am time check
+    if ( 5 > uvValue) {
+        $(".uv-index").removeClass('low moderate high');
+        $(".uv-index").addClass('low');
+   
+    }else if ( 10 < uvValue) {
+        $(".uv-index").removeClass('low moderate high');
+        $(".uv-index").addClass('high');
+   
+   
+   } else {
+   
+    $(".uv-index").removeClass('low moderate high');
+    $(".uv-index").addClass('moderate');
+   }
+   
+
+   }
+   uvCheck();
     
-    
 
 
 
-
-
-userFormEl.addEventListener("submit", formSubmitHandler);
+citySearch.addEventListener("submit", formSubmitHandler);

@@ -33,6 +33,32 @@ $.get(queryUV)
     $("#weather-view").prepend(cityDiv);
 })
 
+//Daynamically add the passed city on the search history
+function addToList(c){
+    var listEl= $("<li>"+c.toUpperCase()+"</li>");
+    $(listEl).attr("class","list-group-item");
+    $(listEl).attr("data-value",c.toUpperCase());
+    $(".list-group").append(listEl);
+}
+// display the past search again when the list group item is clicked in search history
+function invokePastSearch(event){
+    var liEl=event.target;
+    if (event.target.matches("li")){
+        city=liEl.textContent.trim();
+        currentWeather(city);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
 
 })
 
@@ -84,7 +110,7 @@ var uvCheck = function (){
        uvColour.removeClass('low moderate high');
        uvColour.addClass('low');
    
-    } if ( 10 = uv) {
+    }else if ( 10 = uv) {
     uvColour.removeClass('low moderate high');
     uvColour.addClass('high');
    
