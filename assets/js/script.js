@@ -1,6 +1,8 @@
 var citySearch = document.querySelector("#city-form");
 var cityName = document.querySelector("#city-name");
 
+
+
 // takes the userFormEl
 var formSubmitHandler = function(event) {
     event.preventDefault();
@@ -13,23 +15,64 @@ var formSubmitHandler = function(event) {
   } else {
     alert("Please choose a city on Earth");
   }
+
+/////////////////////////////////////////////////////////////////////////////////
+// save  to local storage isnt working, it displays the proper city data, but doesnt set it to local storage
+  citySearch.addEventListener("click", function(event){
+    event.preventDefault();
+    let cityTextVal = $("#city-name").val();
+    localStorage.setItem("name", cityTextVal);
+    console.log(cityTextVal);
+ });
   };
-
-
+/////////////////////////////////////////////////////////////////////////////////
 
 var getCityInfo = function(city) {
-  // format the github api url
-  var currentWeatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=4c67d1c852a0404242197e390eff43e5";
 
-  // make a request to the url
+  var currentWeatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=21b63c71c6a3e2308ee862840ee05551";
+  
   fetch(currentWeatherUrl).then(function(currentWeatherUrlResponse) {
     currentWeatherUrlResponse.json().then(function(currentWeatherUrldata) {
-      console.log(currentWeatherUrldata);
       currentCity(currentWeatherUrldata, city);
     });
   });
-};
 
+  
+
+ 
+    var fiveDayForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=21b63c71c6a3e2308ee862840ee05551";
+    
+    fetch(fiveDayForecastUrl).then(function(fiveDayForecastUrlResponse) {
+      fiveDayForecastUrlResponse.json().then(function(fiveDayForecastUrldata) {
+        fiveDayForecast(fiveDayForecastUrldata, city);
+        return;
+      });
+    });
+};
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//this is what you were last working on, trying to get the weather icon and 5 day forcast functions. 
+fiveDayForecast = function(fiveDayForecastData){
+  var test = fiveDayForecastData;
+  console.log(test);
+  
+  var day1Temp = fiveDayForecastData.list[0].main.temp;
+  var day1Icon = "https://openweathermap.org/img/w/" + fiveDayForecastData.weather.icon + ".png";
+  var day1Humidity= fiveDayForecastData.main.humidity;
+
+
+
+
+    $('.date-day-one').html.moment().add(1, 'days').calendar();
+    $('.icon-day-one').append(day1Icon);
+    $('.temp-day-one').append(day1Temp);
+    $('.humidity-day-one').append(day1Humidity);
+    
+  }
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// weather values for the current city
 currentCity = function(currentCityData){
 
     var searchedCity = currentCityData.name;
@@ -50,16 +93,17 @@ currentCity = function(currentCityData){
     $(".humidity").append(humidity);
     $(".wind-speed").append(windSpeed);
 
-
+// date 
     function update() {
         $('#current-date').html(moment().format("MMM Do YY"));
       
       };
       update(update, 600,000);
 
-    var uvIndexUrl = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=4c67d1c852a0404242197e390eff43e5"
+// 
+    var uvIndexUrl = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=21b63c71c6a3e2308ee862840ee05551"
 
-   // make a request to the url
+   // make a request to the uv url
    fetch(uvIndexUrl).then(function(uvIndexUrlResponse) {
     uvIndexUrlResponse.json().then(function(uvIndexdata) {
       console.log(uvIndexdata);
@@ -67,8 +111,9 @@ currentCity = function(currentCityData){
        
     });
   });
+
 };
-    
+// uv index data
 uvData = function(uvIndex){
     console.log(uvIndex);
     
@@ -80,9 +125,8 @@ uvData = function(uvIndex){
 
  
 };
-
+// uv index value checking severity to add class value
 var uvCheck = function (uvValue){
-        
         
     console.log(uvCheck)
     // 9 am time check
@@ -90,22 +134,26 @@ var uvCheck = function (uvValue){
         $(".uv-index").removeClass('low moderate high');
         $(".uv-index").addClass('low');
    
-    }else if ( 10 < uvValue) {
+    } if ( 10 < uvValue) {
         $(".uv-index").removeClass('low moderate high');
         $(".uv-index").addClass('high');
    
+     if (null === uvValue) {
+        $(".uv-index").removeClass('low moderate high');
+        $(".uv-index").addClass('test');
+    }
    
-   } else {
+   } if (6,7,8,9 === uvValue){
    
     $(".uv-index").removeClass('low moderate high');
     $(".uv-index").addClass('moderate');
-   }
+   };
    
 
-   }
-   uvCheck();
-    
+}
 
 
-
+uvCheck();
 citySearch.addEventListener("submit", formSubmitHandler);
+
+
